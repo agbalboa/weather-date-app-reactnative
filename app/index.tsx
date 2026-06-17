@@ -1,4 +1,4 @@
-import { Platform, StyleSheet, View, Text } from 'react-native';
+import { Platform, ScrollView, StyleSheet, View, Text } from 'react-native';
 
 import { useEffect, useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -99,79 +99,85 @@ export default function HomeScreen() {
         colors={['#4a0e17', '#2a080c']}
         style={styles.background}
       >
-      
-      <View style={styles.locationContainer}>
-        <MaterialIcons name="location-pin" size={18} color="#d4af37" />
-        <Text style={styles.locationFont}>NASUGBU BATANGAS, PH</Text>
-      </View>
 
-      {/* current time */}
-      <View style={styles.styledContainer}>
-        <View style={styles.titleRow}>
-          <MaterialIcons name="access-time" size={14} color="#d4af37" />
-          <Text style={styles.subtitle}>CURRENT TIME</Text>
-        </View>
+          <View style={styles.locationContainer}>
+            <MaterialIcons name="location-pin" size={18} color="#d4af37" />
+            <Text style={styles.locationFont}>NASUGBU BATANGAS, PH</Text>
+          </View>
 
-          <Text style={styles.textTime}>{currentTime.toLocaleTimeString()}</Text>
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
 
-        <View style={styles.subtitleRow}>
-          <MaterialIcons name="date-range" size={14} color="#a3a3a3" />
-          <Text style={styles.lowerSubtitle}>
-            {currentTime.toLocaleDateString('en-US', {
-              weekday: 'long',
-              month: 'long',
-              day: 'numeric',
-              year: 'numeric',
-            })}
-        </Text>
-        </View>
-      </View>
-
-      {/* weather */}
-      <View style={styles.styledContainer}>
-        <View style={styles.titleRow}>
-          <MaterialIcons name="cloud" size={14} color="#d4af37" />
-          <Text style={styles.subtitle}>WEATHER UPDATES</Text>
-        </View>
-
-          <Text style={styles.temp}>
-            {currentTempC !== null ? `${Math.round(currentTempC)}°C` : '--'}
-          </Text>
-          <Text style={styles.weather}>{currentWeather}</Text>
-
-          <View style={styles.statsContainer}>
-            <View style={styles.statItem}>
-              <Text style={styles.statLabel}>HUMIDITY</Text>
-              <Text style={styles.statValue}>
-                {currentHumidity !== null ? `${Math.round(currentHumidity)}%` : '--'}
-              </Text>
+          {/* current time */}
+          <View style={styles.styledContainer}>
+            <View style={styles.titleRow}>
+              <MaterialIcons name="access-time" size={14} color="#d4af37" />
+              <Text style={styles.subtitle}>CURRENT TIME</Text>
             </View>
 
-            <View style={styles.statDivider} />
+            <Text style={styles.textTime}>{currentTime.toLocaleTimeString()}</Text>
 
-            <View style={styles.statItem}>
-              <Text style={styles.statLabel}>WIND</Text>
-              <Text style={styles.statValue}>
-                {currentWindKph !== null ? `${Math.round(currentWindKph)} km/h` : '--'}
+            <View style={styles.subtitleRow}>
+              <MaterialIcons name="date-range" size={14} color="#a3a3a3" />
+              <Text style={styles.lowerSubtitle}>
+                {currentTime.toLocaleDateString('en-US', {
+                  weekday: 'long',
+                  month: 'long',
+                  day: 'numeric',
+                  year: 'numeric',
+                })}
               </Text>
             </View>
           </View>
-      </View>
 
-      {/* current time */}
-      <View style={styles.styledContainer}>
-        <View style={styles.titleRow}>
+          {/* weather */}
+          <View style={styles.styledContainer}>
+            <View style={styles.titleRow}>
+              <MaterialIcons name="cloud" size={14} color="#d4af37" />
+              <Text style={styles.subtitle}>WEATHER UPDATES</Text>
+            </View>
+
+            <Text style={styles.temp}>
+              {currentTempC !== null ? `${Math.round(currentTempC)}°C` : '--'}
+            </Text>
+            <Text style={styles.weather}>{currentWeather}</Text>
+
+            <View style={styles.statsContainer}>
+              <View style={styles.statItem}>
+                <Text style={styles.statLabel}>HUMIDITY</Text>
+                <Text style={styles.statValue}>
+                  {currentHumidity !== null ? `${Math.round(currentHumidity)}%` : '--'}
+                </Text>
+              </View>
+
+              <View style={styles.statDivider} />
+
+              <View style={styles.statItem}>
+                <Text style={styles.statLabel}>WIND</Text>
+                <Text style={styles.statValue}>
+                  {currentWindKph !== null ? `${Math.round(currentWindKph)} km/h` : '--'}
+                </Text>
+              </View>
+            </View>
+          </View>
+
+          {/* current time */}
+          <View style={styles.styledContainer}>
+            <View style={styles.titleRow}>
+              <Ionicons name="logo-react" size={14} color="#d4af37" />
+              <Text style={styles.subtitle}>REACT NATIVE</Text>
+            </View>
+            <Text style={styles.name}>SIR MAGS</Text>
+          </View>
+        </ScrollView>
+
+        {/* footer */}
+        <View style={styles.footer}>
           <Ionicons name="logo-react" size={14} color="#d4af37" />
-          <Text style={styles.subtitle}>REACT NATIVE</Text>
+          <Text style={styles.footerText}>REACT NATIVE - LIVE MONITORS</Text>
         </View>
-        <Text style={styles.name}>SIR MAGS</Text>
-      </View>
-
-      {/* footer */}
-      <View style={styles.footer}>
-        <Ionicons name="logo-react" size={14} color="#d4af37" />
-        <Text style={styles.footerText}>REACT NATIVE - LIVE MONITORS</Text>
-      </View>
 
       </LinearGradient>
     </View>
@@ -184,9 +190,14 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: 44,
+  },
+  scrollContent: {
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: Platform.OS === 'ios' ? 90 : 55,
+    paddingBottom: 100,
   },
   styledContainer: {
     flexDirection: 'column',
