@@ -176,7 +176,7 @@ export default function HomeScreen() {
         {/* footer */}
         <View style={styles.footer}>
           <Ionicons name="logo-react" size={14} color="#d4af37" />
-          <Text style={styles.footerText}>REACT NATIVE - LIVE MONITORS</Text>
+          <Text style={styles.footerText}>REACT NATIVE - LIVE MONITOR</Text>
         </View>
 
       </LinearGradient>
